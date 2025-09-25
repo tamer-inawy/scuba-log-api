@@ -35,7 +35,7 @@ export class PermAuthGuard implements CanActivate {
     const requestId = +req.params.id || 0;
     const user = await this.usersService.findOne(req.user.userId);
 
-    if (!user) throw new UnauthorizedException('Unauthorized!');
+    if (!user) throw new UnauthorizedException('Unauthorized User!');
 
     let editedEntity: any;
 
@@ -43,9 +43,9 @@ export class PermAuthGuard implements CanActivate {
       case 'Buddies':
         editedEntity = await this.buddiesService.findOne(requestId);
       case 'DiveLogs':
-        editedEntity = await this.diveLogsService.findOne(requestId);
+        if(editedEntity === undefined) editedEntity = await this.diveLogsService.findOne(requestId);
       case 'Equipment':
-        editedEntity = await this.equipmentService.findOne(requestId);
+        if(editedEntity === undefined) editedEntity = await this.equipmentService.findOne(requestId);
         switch (methodName) {
           case AuthAction.CREATE:
             req.body.userId = user.id; // force userId to be the logged-in user
@@ -53,8 +53,9 @@ export class PermAuthGuard implements CanActivate {
           case AuthAction.FIND_ONE:
           case AuthAction.UPDATE:
           case AuthAction.REMOVE:
+            console.log(requestId, editedEntity);
             if (!editedEntity || editedEntity.userId !== user.id) {
-              throw new UnauthorizedException('Unauthorized!');
+              throw new UnauthorizedException(`Invalid ${className}!`);
             }
             break;
         }
@@ -66,7 +67,7 @@ export class PermAuthGuard implements CanActivate {
           case AuthAction.UPDATE:
           case AuthAction.REMOVE:
             if (requestId !== user.id) {
-              throw new UnauthorizedException('Unauthorized!');
+              throw new UnauthorizedException('Unauthorized User!');
             }
             break;
         }
