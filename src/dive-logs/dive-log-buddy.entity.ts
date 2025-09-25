@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { DiveLog } from './dive-log.entity';
-import { Buddy } from '../buddies/buddy.entity';
+import { Buddy } from 'src/buddies/buddy.entity';
 
 @Entity('dive_log_buddies')
 export class DiveLogBuddy {

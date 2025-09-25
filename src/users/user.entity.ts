@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { DiveLog } from '../dive-logs/dive-log.entity';
-import { Equipment } from '../equipment/equipment.entity';
-import { Buddy } from '../buddies/buddy.entity';
+import { DiveLog } from 'src/dive-logs/dive-log.entity';
+import { Equipment } from 'src/equipment/equipment.entity';
+import { Buddy } from 'src/buddies/buddy.entity';
 
 @Entity('users')
 export class User {

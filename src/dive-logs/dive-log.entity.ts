@@ -6,8 +6,8 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { User } from '../users/user.entity';
-import { DiveSite } from '../dive-sites/dive-site.entity';
+import { User } from 'src/users/user.entity';
+import { DiveSite } from 'src/dive-sites/dive-site.entity';
 import { DiveLogBuddy } from './dive-log-buddy.entity';
 
 @Entity('dive_logs')

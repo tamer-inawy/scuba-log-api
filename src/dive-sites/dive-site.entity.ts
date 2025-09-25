@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { DiveLog } from '../dive-logs/dive-log.entity';
+import { DiveLog } from 'src/dive-logs/dive-log.entity';
 
 @Entity('dive_sites')
 export class DiveSite {
