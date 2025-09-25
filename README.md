@@ -6,19 +6,25 @@
 
 A Scuba Loogbook API based on [Nest](https://github.com/nestjs/nest) framework.
 
-## Project setup on docker
+## Project setup
 
-```bash
-docker compose up -d
-```
-
-## Project setup on local
-
+Ensure [Node.js](https://nodejs.org/en/download) is installed on your local machine, then run the following command:
 ```bash
 $ npm install
 ```
 
-## Compile and run the project
+## Compile and run the project on Docker
+
+Ensure [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) are installed on your local machine, then run the following command:
+```bash
+docker compose up -d
+```
+
+## Compile and run the project on local
+
+1. Ensure [PostgreSQL](https://www.postgresql.org/download/) is installed on your local machine.
+2. Create a new database.
+3. Update the `.env` file with your local DB credentials, then use the following commands:
 
 ```bash
 # development

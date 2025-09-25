@@ -3,7 +3,7 @@ name: logbook-dev
 services:
   logbook:
     build: ./
-    command: npm start
+    command: npm run start:dev
     environment:
       - NODE_ENV=development
       - DB_USER=postgres
