@@ -10,19 +10,19 @@ export class DiveLogsService {
   constructor(
     @InjectRepository(DiveLog)
     private repo: Repository<DiveLog>,
-  ) {}
+  ) { }
 
   create(dto: CreateDiveLogDto) {
     const entity = this.repo.create(dto);
     return this.repo.save(entity);
   }
 
-  findAll() {
-    return this.repo.find({ relations: ['site', 'buddies', 'equipment', 'user'] });
+  findAll(userId: number) {
+    return this.repo.find({ where: { userId }, relations: ['diveSite', 'buddyConnections', 'user'] });
   }
 
   findOne(id: number) {
-    return this.repo.findOne({ where: { id }, relations: ['site', 'buddies', 'equipment', 'user'] });
+    return this.repo.findOne({ where: { id }, relations: ['diveSite', 'buddyConnections', 'user'] });
   }
 
   update(id: number, dto: UpdateDiveLogDto) {

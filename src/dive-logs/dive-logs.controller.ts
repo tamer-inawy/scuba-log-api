@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, Request } from '@nestjs/common';
 import { DiveLogsService } from './dive-logs.service';
 import { CreateDiveLogDto } from './dto/create-dive-log.dto';
 import { UpdateDiveLogDto } from './dto/update-dive-log.dto';
@@ -13,8 +13,8 @@ export class DiveLogsController {
   }
 
   @Get()
-  findAll() {
-    return this.service.findAll();
+  findAll(@Request() req) {
+    return this.service.findAll(req.user.userId);
   }
 
   @Get(':id')

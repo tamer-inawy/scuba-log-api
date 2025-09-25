@@ -10,19 +10,19 @@ export class BuddiesService {
   constructor(
     @InjectRepository(Buddy)
     private repo: Repository<Buddy>,
-  ) {}
+  ) { }
 
   create(dto: CreateBuddyDto) {
     const entity = this.repo.create(dto);
     return this.repo.save(entity);
   }
 
-  findAll() {
-    return this.repo.find({ relations: ['user'] });
+  findAll(userId: number) {
+    return this.repo.find({ where: { userId }, relations: ['linkedUser'] });
   }
 
   findOne(id: number) {
-    return this.repo.findOne({ where: { id }, relations: ['user'] });
+    return this.repo.findOne({ where: { id }, relations: ['linkedUser'] });
   }
 
   update(id: number, dto: UpdateBuddyDto) {

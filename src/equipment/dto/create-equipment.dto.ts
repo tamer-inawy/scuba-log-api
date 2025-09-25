@@ -2,6 +2,10 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateEquipmentDto {
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
   @IsNotEmpty()
   userId: number;
 
@@ -14,5 +18,5 @@ export class CreateEquipmentDto {
 
   @IsOptional()
   @IsString()
-  serialNumber?: string;
+  serialNo?: string;
 }

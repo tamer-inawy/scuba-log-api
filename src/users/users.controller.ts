@@ -3,7 +3,6 @@ import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from '@nes
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -12,7 +11,7 @@ export class UsersController {
   @Post()
   create(@Body() dto: CreateUserDto) {
     return this.service.create(dto).then(user => {
-      const { passwordHash, ...result } = user;
+      const { password, ...result } = user;
       return result;
     });
   }
@@ -20,17 +19,14 @@ export class UsersController {
   @Get()
   findAll() {
     return this.service.findAll().then(users => users.map(user => {
-      const { passwordHash, ...result } = user;
+      const { password, ...result } = user;
       return result;
     }));
   }
   
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.service.findOne(id).then(user => {
-      const { passwordHash, ...result } = { ...user };
-      return result;
-    });
+    return this.service.findOne(id);
   }
 
   @Put(':id')

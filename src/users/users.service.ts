@@ -13,7 +13,7 @@ export class UsersService {
   ) { }
 
   create(dto: CreateUserDto) {
-    const user = this.repo.create({ ...dto, passwordHash: dto.password });
+    const user = this.repo.create({ ...dto, password: dto.password });
     return this.repo.save(user);
   }
 
@@ -34,7 +34,7 @@ export class UsersService {
   }
 
   async findByEmail(email: string) {
-    return this.repo.findOne({ where: { email } });
+    return this.repo.findOne({ select: ['id', 'name', 'email', 'password',], where: { email } });
   }
 
 }

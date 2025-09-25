@@ -27,7 +27,7 @@
   - `User` has many `DiveLog`, `Buddy`, `Equipment`.
   - `DiveLog` links to `User`, `DiveSite`, many `Buddy` and `Equipment`.
   - `DiveSite` has many `DiveLog`.
-- **Password Handling:** Passwords are hashed with bcrypt before storage. Never expose `passwordHash` in API responses.
+- **Password Handling:** Passwords are hashed with bcrypt before storage. Never expose `password` in API responses.
 - **Guards:** Use `JwtAuthGuard` for protected routes. Some controllers have commented-out guards for future enforcement.
 - **Service Pattern:** All business logic is in `*.service.ts`. Controllers are thin and delegate to services.
 - **TypeORM:** Use repository pattern via `@InjectRepository`.
@@ -45,7 +45,7 @@
 ## Conventions
 - Use async/await and Promises for all DB and service calls.
 - Always validate input with DTOs.
-- Never return sensitive fields (like `passwordHash`).
+- Never return sensitive fields (like `password`).
 - Keep controllers thin; put logic in services.
 
 ---

@@ -1,10 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, Request } from '@nestjs/common';
 import { BuddiesService } from './buddies.service';
 import { CreateBuddyDto } from './dto/create-buddy.dto';
 import { UpdateBuddyDto } from './dto/update-buddy.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-// @UseGuards(JwtAuthGuard)
 @Controller('buddies')
 export class BuddiesController {
   constructor(private readonly service: BuddiesService) {}
@@ -15,8 +13,8 @@ export class BuddiesController {
   }
 
   @Get()
-  findAll() {
-    return this.service.findAll();
+  findAll(@Request() req) {
+    return this.service.findAll(req.user.userId);
   }
 
   @Get(':id')

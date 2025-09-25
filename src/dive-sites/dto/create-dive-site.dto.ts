@@ -1,10 +1,13 @@
-// dto/create-dive-site.dto.ts
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateDiveSiteDto {
   @IsNotEmpty()
   @IsString()
   name: string;
+
+  @IsNotEmpty()
+  @IsString()
+  location: string;
 
   @IsOptional()
   @IsNumber()

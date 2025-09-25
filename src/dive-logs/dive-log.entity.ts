@@ -3,15 +3,12 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  ManyToMany,
-  JoinTable,
-  CreateDateColumn,
-  UpdateDateColumn,
+  OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import { User } from '../users/user.entity';
 import { DiveSite } from '../dive-sites/dive-site.entity';
-import { Buddy } from '../buddies/buddy.entity';
-import { Equipment } from '../equipment/equipment.entity';
+import { DiveLogBuddy } from './dive-log-buddy.entity';
 
 @Entity('dive_logs')
 export class DiveLog {
@@ -19,45 +16,31 @@ export class DiveLog {
   id: number;
 
   @ManyToOne(() => User, (user) => user.diveLogs, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @ManyToOne(() => DiveSite, (site) => site.diveLogs, {
-    onDelete: 'SET NULL',
-    nullable: true,
-  })
-  site: DiveSite;
+  @Column({ name: 'user_id' })
+  userId: number;
 
-  @Column({ name: 'dive_date', type: 'date' })
-  diveDate: Date;
+  @ManyToOne(() => DiveSite, (site) => site.diveLogs, { onDelete: 'SET NULL' })
+  @JoinColumn({ name: 'dive_site_id' })
+  diveSite: DiveSite;
 
-  @Column({ type: 'decimal', precision: 5, scale: 2 })
+  @Column({ nullable: true })
+  dive_site_id: number;
+
+  @Column()
+  date: Date;
+
+  @Column()
   depth: number;
 
-  @Column({ type: 'int' })
+  @Column()
   duration: number;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ nullable: true })
   notes: string;
 
-  @ManyToMany(() => Buddy, (buddy) => buddy.diveLogs)
-  @JoinTable({
-    name: 'dive_buddies',
-    joinColumn: { name: 'dive_log_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'buddy_id', referencedColumnName: 'id' },
-  })
-  buddies: Buddy[];
-
-  @ManyToMany(() => Equipment, (equipment) => equipment.diveLogs)
-  @JoinTable({
-    name: 'dive_equipment',
-    joinColumn: { name: 'dive_log_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'equipment_id', referencedColumnName: 'id' },
-  })
-  equipment: Equipment[];
-
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
+  @OneToMany(() => DiveLogBuddy, (dlb) => dlb.diveLog)
+  buddyConnections: DiveLogBuddy[];
 }

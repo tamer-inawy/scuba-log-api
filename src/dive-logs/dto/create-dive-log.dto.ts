@@ -9,7 +9,7 @@ export class CreateDiveLogDto {
   siteId?: number;
 
   @IsDateString()
-  diveDate: string;
+  date: string;
 
   @IsNumber()
   depth: number;
