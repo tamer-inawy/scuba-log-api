@@ -35,10 +35,6 @@ export class PermAuthGuard implements CanActivate {
     const requestId = +req.params.id || 0;
     const user = await this.usersService.findOne(req.user.userId);
 
-    console.log(req.params);
-    console.log(req.body);
-    console.log(req.user);
-
     if (!user) throw new UnauthorizedException('Unauthorized!');
 
     let editedEntity: any;
