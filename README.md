@@ -6,7 +6,13 @@
 
 A Scuba Loogbook API based on [Nest](https://github.com/nestjs/nest) framework.
 
-## Project setup
+## Project setup on docker
+
+```bash
+docker compose up -d
+```
+
+## Project setup on local
 
 ```bash
 $ npm install
