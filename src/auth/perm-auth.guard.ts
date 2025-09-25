@@ -2,11 +2,11 @@ import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from
 import { Reflector } from '@nestjs/core';
 
 import { IS_PUBLIC_KEY } from './public.decorator';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import { AuthAction } from './actions.enum';
-import { BuddiesService } from 'src/buddies/buddies.service';
-import { DiveLogsService } from 'src/dive-logs/dive-logs.service';
-import { EquipmentService } from 'src/equipment/equipment.service';
+import { BuddiesService } from '../buddies/buddies.service';
+import { DiveLogsService } from '../dive-logs/dive-logs.service';
+import { EquipmentService } from '../equipment/equipment.service';
 
 @Injectable()
 export class PermAuthGuard implements CanActivate {

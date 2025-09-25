@@ -4,14 +4,14 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 
 import { AuthController } from './auth.controller';
-import { UsersModule } from 'src/users/users.module';
+import { UsersModule } from '../users/users.module';
 import { JwtStrategy } from './jwt.strategy';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { PermAuthGuard } from './perm-auth.guard';
-import { DiveSitesModule } from 'src/dive-sites/dive-sites.module';
-import { DiveLogsModule } from 'src/dive-logs/dive-logs.module';
-import { BuddiesModule } from 'src/buddies/buddies.module';
-import { EquipmentModule } from 'src/equipment/equipment.module';
+import { DiveSitesModule } from '../dive-sites/dive-sites.module';
+import { DiveLogsModule } from '../dive-logs/dive-logs.module';
+import { BuddiesModule } from '../buddies/buddies.module';
+import { EquipmentModule } from '../equipment/equipment.module';
 
 @Module({
   imports: [

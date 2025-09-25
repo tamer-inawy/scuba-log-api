@@ -6,8 +6,8 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { User } from 'src/users/user.entity';
-import { DiveLogBuddy } from 'src/dive-logs/dive-log-buddy.entity';
+import { User } from '../users/user.entity';
+import { DiveLogBuddy } from '../dive-logs/dive-log-buddy.entity';
 
 @Entity('buddies')
 export class Buddy {
