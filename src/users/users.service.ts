@@ -18,11 +18,11 @@ export class UsersService {
   }
 
   findAll() {
-    return this.repo.find();
+    return this.repo.find({ relations: ['diveLogs', 'equipment'] });
   }
 
   findOne(id: number) {
-    return this.repo.findOne({ where: { id } });
+    return this.repo.findOne({ where: { id }, relations: ['diveLogs', 'equipment'] });
   }
 
   update(id: number, dto: UpdateUserDto) {

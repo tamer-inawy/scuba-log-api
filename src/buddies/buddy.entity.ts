@@ -3,11 +3,11 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  OneToMany,
   JoinColumn,
+  ManyToMany,
 } from 'typeorm';
 import { User } from '../users/user.entity';
-import { DiveLogBuddy } from '../dive-logs/dive-log-buddy.entity';
+import { DiveLog } from 'src/dive-logs/dive-log.entity';
 
 @Entity('buddies')
 export class Buddy {
@@ -23,14 +23,6 @@ export class Buddy {
   @Column({ nullable: true })
   contactInfo: string;
 
-  // Owner (who created this buddy record in their own list)
-  @ManyToOne(() => User, (user) => user.buddies, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'user_id' })
-  owner: User;
-
-  @Column({ name: 'user_id' })
-  userId: number;
-
   // Optional link if buddy is a registered user
   @ManyToOne(() => User, { nullable: true })
   @JoinColumn({ name: 'linked_user_id' })
@@ -39,6 +31,6 @@ export class Buddy {
   @Column({ name: 'linked_user_id', nullable: true })
   linkedUserId: number;
 
-  @OneToMany(() => DiveLogBuddy, (dlb) => dlb.buddy)
-  diveLogConnections: DiveLogBuddy[];
+  @ManyToMany(() => DiveLog, log => log.buddies)
+  diveLogs: DiveLog[];
 }

@@ -26,6 +26,4 @@ export class User {
   @OneToMany(() => Equipment, (equipment) => equipment.user)
   equipment: Equipment[];
 
-  @OneToMany(() => Buddy, (buddy) => buddy.owner)
-  buddies: Buddy[];
 }

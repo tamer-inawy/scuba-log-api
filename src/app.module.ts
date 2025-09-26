@@ -15,7 +15,6 @@ import { DiveLog } from './dive-logs/dive-log.entity';
 import { DiveSite } from './dive-sites/dive-site.entity';
 import { Buddy } from './buddies/buddy.entity';
 import { Equipment } from './equipment/equipment.entity';
-import { DiveLogBuddy } from './dive-logs/dive-log-buddy.entity';
 
 @Module({
   imports: [
@@ -33,8 +32,8 @@ import { DiveLogBuddy } from './dive-logs/dive-log-buddy.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
-      entities: [User, DiveLog, DiveLogBuddy, DiveSite, Buddy, Equipment],
-      // logging: true,
+      entities: [User, DiveLog, DiveSite, Buddy, Equipment],
+      logging: true,
       synchronize: true, // ⚠️ dev only!
     }),
   ],

@@ -5,10 +5,12 @@ import {
   ManyToOne,
   OneToMany,
   JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { User } from '../users/user.entity';
 import { DiveSite } from '../dive-sites/dive-site.entity';
-import { DiveLogBuddy } from './dive-log-buddy.entity';
+import { Buddy } from 'src/buddies/buddy.entity';
 
 @Entity('dive_logs')
 export class DiveLog {
@@ -41,6 +43,8 @@ export class DiveLog {
   @Column({ nullable: true })
   notes: string;
 
-  @OneToMany(() => DiveLogBuddy, (dlb) => dlb.diveLog)
-  buddyConnections: DiveLogBuddy[];
+  @ManyToMany(() => Buddy, buddy => buddy.diveLogs)
+  @JoinTable({ name: 'dive_log_buddies' }) // This side is the owning side, where the join table is defined
+  buddies: Buddy[];
+  
 }

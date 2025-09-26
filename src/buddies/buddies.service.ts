@@ -1,15 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Buddy } from './buddy.entity';
 import { CreateBuddyDto } from './dto/create-buddy.dto';
 import { UpdateBuddyDto } from './dto/update-buddy.dto';
+import { DiveLogsService } from '../dive-logs/dive-logs.service';
 
 @Injectable()
 export class BuddiesService {
   constructor(
     @InjectRepository(Buddy)
     private repo: Repository<Buddy>,
+    @Inject(forwardRef(() => DiveLogsService))
+    private diveLogsService: DiveLogsService,
   ) { }
 
   create(dto: CreateBuddyDto) {
@@ -17,8 +20,13 @@ export class BuddiesService {
     return this.repo.save(entity);
   }
 
-  findAll(userId: number) {
-    return this.repo.find({ where: { userId }, relations: ['linkedUser'] });
+  async findAll(userId: number) {
+    const logIds = (await this.diveLogsService.findAll(userId)).map(log => log.id);
+    return this.repo.find({ where: { diveLogs: {id: In(logIds)} }, relations: ['linkedUser', 'diveLogs'] });
+  }
+
+  findByIds(ids: number[]) {
+    return this.repo.findBy({ id: In(ids) });
   }
 
   findOne(id: number) {
