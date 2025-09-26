@@ -5,7 +5,7 @@ export class CreateDiveLogDto {
   @IsNotEmpty()
   userId: number;
 
-  @IsOptional()
+  @IsNotEmpty()
   siteId?: number;
 
   @IsDateString()

@@ -34,7 +34,7 @@ import { DiveLogBuddy } from './dive-logs/dive-log-buddy.entity';
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
       entities: [User, DiveLog, DiveLogBuddy, DiveSite, Buddy, Equipment],
-      // entities: [__dirname + './**/*.entity{.ts,.js}'],
+      // logging: true,
       synchronize: true, // ⚠️ dev only!
     }),
   ],

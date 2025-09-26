@@ -26,8 +26,8 @@ export class DiveLog {
   @JoinColumn({ name: 'dive_site_id' })
   diveSite: DiveSite;
 
-  @Column({ nullable: true })
-  dive_site_id: number;
+  @Column({ name: 'dive_site_id' })
+  siteId: number;
 
   @Column()
   date: Date;
