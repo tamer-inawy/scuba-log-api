@@ -33,7 +33,7 @@ import { Equipment } from './equipment/equipment.entity';
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
       entities: [User, DiveLog, DiveSite, Buddy, Equipment],
-      logging: true,
+      // logging: true,
       synchronize: true, // ⚠️ dev only!
     }),
   ],
