@@ -17,6 +17,42 @@ export class AuthController {
     return this.authService.register(userDto);
   }
 
+
+  /**
+   * @api {post} /auth/login Login the users's account
+   * @apiVersion 0.1.0
+   * @apiGroup Auth
+   * @apiPermission none
+   * 
+   * @apiParam {String} email User's email address
+   * @apiParam {String} password User's password
+   * 
+   * @apiSuccess {String} status The request status (success|failed)
+   * @apiSuccess {Object} data The users's details
+   * 
+   * @apiSuccessExample {json} Success
+   *    HTTP/1.1 200 OK
+   *    {
+   *      "status": "success",
+   *      "data": {
+   *        "id": 1,
+   *        "name": "John Doe",
+   *        "email": "john.doe@test.com",
+   *        "role": "User",
+   *        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlRhbWVyIEluYXd5IiwiZW1haWwiOiJ0YW1lci0xQHRlc3QuY29tIiwicm9sZSI6IkNlbGVicml0eSIsImlhdCI6MTU4MjgzNjU2MiwiZXhwIjoxNTgzNDQxMzYyfQ.f-p3a5F30K12dG_FW5Hkm7kAWjTK6WjoJJ25t6glboM"
+   *    }
+   *        }
+   *    }
+    * @apiErrorExample {json} List error
+   *    HTTP/1.1 401 Unauthorized
+   *    {
+   *      "status": "failed",
+   *      "error": {
+   *        "message": "Invalid email or password!"
+   *      }
+   *    }
+   */
+
   @Public()
   @Post('login')
   async login(@Body() body: { email: string; password: string }) {

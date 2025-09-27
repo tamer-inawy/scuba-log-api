@@ -15,6 +15,10 @@ import { DiveLog } from './dive-logs/dive-log.entity';
 import { DiveSite } from './dive-sites/dive-site.entity';
 import { Buddy } from './buddies/buddy.entity';
 import { Equipment } from './equipment/equipment.entity';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { FormattingInterceptor } from './shared/interceptors/formatting.interceptor';
+import { QueryFailedErrorFilter } from './shared/filters/exception.filter';
+import { HttpExceptionFilter } from './shared/filters/http-exception.filter';
 
 @Module({
   imports: [
@@ -38,6 +42,20 @@ import { Equipment } from './equipment/equipment.entity';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: FormattingInterceptor,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: QueryFailedErrorFilter,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+  ],
 })
 export class AppModule { }
