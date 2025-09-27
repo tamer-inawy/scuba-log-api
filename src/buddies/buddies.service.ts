@@ -20,7 +20,11 @@ export class BuddiesService {
     return this.repo.save(entity);
   }
 
-  async findAll(userId: number) {
+  async findAll() {
+    return this.repo.find({ relations: ['linkedUser', 'diveLogs'] });
+  }
+
+  async findByUserId(userId: number) {
     const logIds = (await this.diveLogsService.findAll(userId)).map(log => log.id);
     return this.repo.find({ where: { diveLogs: {id: In(logIds)} }, relations: ['linkedUser', 'diveLogs'] });
   }

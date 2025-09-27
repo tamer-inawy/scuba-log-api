@@ -14,7 +14,12 @@ export class BuddiesController {
 
   @Get()
   findAll(@Request() req) {
-    return this.service.findAll(req.user.userId);
+    return this.service.findAll();
+  }
+
+  @Get('/user/:userId')
+  findByUser(@Param('userId') userId: number) {
+    return this.service.findByUserId(userId);
   }
 
   @Get(':id')
