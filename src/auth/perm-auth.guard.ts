@@ -53,7 +53,6 @@ export class PermAuthGuard implements CanActivate {
           case AuthAction.FIND_ONE:
           case AuthAction.UPDATE:
           case AuthAction.REMOVE:
-            console.log(requestId, editedEntity);
             if (!editedEntity || editedEntity.userId !== user.id) {
               throw new UnauthorizedException(`Invalid ${className}!`);
             }
